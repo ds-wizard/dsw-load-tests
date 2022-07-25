@@ -1,0 +1,17 @@
+general:
+  environment: Production
+  serverPort: 3000
+  clientUrl: http://localhost:8080
+  secret: ab012345678901234567890123456789
+
+database:
+  connectionString: postgresql://postgres:postgres@postgres:5432/dsw
+
+s3:
+  url: http://minio:9000
+  username: minio
+  password: minioPassword
+  bucket: dsw
+
+logging:
+  level: INFO

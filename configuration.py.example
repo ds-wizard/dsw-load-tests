@@ -1,8 +1,0 @@
-# Credentials
-email = ""
-password = ""
-
-# UUIDs of require entities
-questionnaire_uuid = ""
-common_template_uuid = "43a3fdd1-8535-42e0-81a7-5edbff296e65"
-science_europe_template_uuid = "43a3fdd1-8535-42e0-81a7-5edbff296e66"
