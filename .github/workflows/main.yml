@@ -1,0 +1,105 @@
+name: Load Tests
+
+on:
+  push:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      server_image:
+        description: 'Wizard Server image'
+        required: false
+        default: 'docker.ds-wizard.org/wizard-server:develop'
+
+jobs:
+  load-test:
+    name: Load Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        locustfile:
+          - 'basic'
+
+    steps:
+    - name: Set variables from repository dispatch
+      if: github.event_name == 'repository_dispatch'
+      uses: allenevans/set-env@v2.2.0
+      with:
+        SERVER_IMAGE: ${{ github.event.client_payload.server_image }}
+        CLIENT_IMAGE: ${{ github.event.client_payload.client_image }}
+        DOCWORKER_IMAGE: ${{ github.event.client_payload.docworker_image }}
+
+    - name: Set variables from workflow dispatch
+      if: github.event_name == 'workflow_dispatch'
+      uses: allenevans/set-env@v2.2.0
+      with:
+        SERVER_IMAGE: ${{ github.event.inputs.server_image }}
+        CLIENT_IMAGE: ${{ github.event.inputs.client_image }}
+        DOCWORKER_IMAGE: ${{ github.event.inputs.docworker_image }}
+
+    - name: Docker login [private]
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ secrets.PRIVATE_REGISTRY_URL }}
+        username: ${{ secrets.PRIVATE_REGISTRY_USERNAME }}
+        password: ${{ secrets.PRIVATE_REGISTRY_PASSWORD }}
+
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+        cache: pip
+        cache-dependency-path: |
+          requirements.txt
+
+    - name: Prepare Python env
+      run: |
+        python -m pip install -U pip setuptools wheel
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Prepare
+      run: |
+        make clean
+        make init
+
+    - name: Start DSW
+      run: |
+        make start
+        make wait
+
+    - name: Run load test
+      run: |
+        locust -f tests/${{ matrix.locustfile }}.py \
+          --csv=${{ matrix.locustfile }} \
+          --html=${{ matrix.locustfile }}.html \
+          --headless \
+          --only-summary \
+          --host=http://localhost:3000 \
+          --users=100 \
+          --spawn-rate=100 \
+          --run-time=5m
+
+    - name: Convert results to JSON
+      run: |
+        python tools/csv2json.py ${{ matrix.locustfile }}_stats.csv ${{ matrix.locustfile }}.json
+
+    - name: Upload report artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.locustfile }}-report
+        path: |
+          ${{ matrix.locustfile }}_*.csv
+          ${{ matrix.locustfile }}.html
+          ${{ matrix.locustfile }}.json
+
+    - name: Check results
+      run: |
+        python tools/check_results.py ${{ matrix.locustfile }}.json tests/${{ matrix.locustfile }}.expectations.json

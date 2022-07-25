@@ -1,1 +1,7 @@
-configuration.py
+__pycache__
+env
+dsw/docker-compose.yml
+
+/*.csv
+/*.html
+/*.json
