@@ -18,8 +18,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        locustfile:
-          - 'basic'
+        test:
+          - 'package-detail'
+          - 'packages-list'
+          - 'questionnaire-clone'
+          - 'questionnaire-detail'
+          - 'questionnaire-update'
+          - 'questionnaires-list'
+          - 'user-create'
+          - 'user-register'
+          - 'user-update'
+          - 'users-list'
+          - 'visit-login'
 
     steps:
     - name: Set variables from repository dispatch
@@ -75,31 +85,38 @@ jobs:
         make start
         make wait
 
+    - name: Prepare DB
+      run: |
+        SEED_FILE="tests/${{ matrix.test }}/seed.sql"
+        if [[ -f "$SEED_FILE" ]]; then
+          PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 5432 -d dsw -a -f "$SEED_FILE"
+        fi
+
     - name: Run load test
       run: |
-        locust -f tests/${{ matrix.locustfile }}.py \
-          --csv=${{ matrix.locustfile }} \
-          --html=${{ matrix.locustfile }}.html \
+        locust -f tests/${{ matrix.test }}/locustfile.py \
+          --csv=${{ matrix.test }} \
+          --html=${{ matrix.test }}.html \
           --headless \
           --only-summary \
           --host=http://localhost:3000 \
           --users=100 \
-          --spawn-rate=100 \
-          --run-time=5m
+          --spawn-rate=10 \
+          --run-time=3m
 
     - name: Convert results to JSON
       run: |
-        python tools/csv2json.py ${{ matrix.locustfile }}_stats.csv ${{ matrix.locustfile }}.json
+        python tools/csv2json.py ${{ matrix.test }}_stats.csv ${{ matrix.test }}.json
 
     - name: Upload report artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ matrix.locustfile }}-report
+        name: ${{ matrix.test }}-report
         path: |
-          ${{ matrix.locustfile }}_*.csv
-          ${{ matrix.locustfile }}.html
-          ${{ matrix.locustfile }}.json
+          ${{ matrix.test }}_*.csv
+          ${{ matrix.test }}.html
+          ${{ matrix.test }}.json
 
     - name: Check results
       run: |
-        python tools/check_results.py ${{ matrix.locustfile }}.json tests/${{ matrix.locustfile }}.expectations.json
+        python tools/check_results.py ${{ matrix.test }}.json tests/${{ matrix.test }}/expectations.json

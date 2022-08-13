@@ -1,0 +1,42 @@
+{
+  "aggregated": {
+    "requestsCount": {
+      "type": "range",
+      "min": 1000,
+      "max": null
+    },
+    "failureCount": {
+      "type": "range",
+      "min": 0,
+      "max": 0
+    },
+    "medianResponseTime": {
+      "type": "range",
+      "min": 0,
+      "max": 5000
+    },
+    "averageResponseTime": {
+      "type": "range",
+      "min": 0,
+      "max": 5000
+    },
+    "minResponseTime": null,
+    "maxResponseTime": {
+      "type": "range",
+      "min": 0,
+      "max": 30000
+    },
+    "averageContentSize": null,
+    "requestsPerSecond": {
+      "type": "range",
+      "min": 10,
+      "max": null
+    },
+    "failuresPerSecond": {
+      "type": "range",
+      "min": 0,
+      "max": 0
+    },
+    "responseTimeStats": null
+  }
+}
