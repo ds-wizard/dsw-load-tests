@@ -5,7 +5,7 @@ from locust import HttpUser, task, between
 
 USERNAME = 'albert.einstein@example.com'
 PASSWORD = 'password'
-QTN_UUID = 'a1cdbff5-c60e-4779-8929-e086a2da9fb'
+QTN_UUID = 'a1cdbff5-c60e-4779-8929-e086a2da9fba'
 
 
 class BasicUser(HttpUser):

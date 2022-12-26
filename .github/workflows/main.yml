@@ -22,6 +22,7 @@ jobs:
           - 'package-detail'
           - 'packages-list'
           - 'questionnaire-clone'
+          - 'questionnaire-create'
           - 'questionnaire-detail'
           - 'questionnaire-update'
           - 'questionnaires-list'
@@ -37,16 +38,12 @@ jobs:
       uses: allenevans/set-env@v2.2.0
       with:
         SERVER_IMAGE: ${{ github.event.client_payload.server_image }}
-        CLIENT_IMAGE: ${{ github.event.client_payload.client_image }}
-        DOCWORKER_IMAGE: ${{ github.event.client_payload.docworker_image }}
 
     - name: Set variables from workflow dispatch
       if: github.event_name == 'workflow_dispatch'
       uses: allenevans/set-env@v2.2.0
       with:
         SERVER_IMAGE: ${{ github.event.inputs.server_image }}
-        CLIENT_IMAGE: ${{ github.event.inputs.client_image }}
-        DOCWORKER_IMAGE: ${{ github.event.inputs.docworker_image }}
 
     - name: Docker login [private]
       if: github.event_name != 'pull_request'
@@ -62,7 +59,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.9
+        python-version: 3.11
         cache: pip
         cache-dependency-path: |
           requirements.txt
@@ -85,12 +82,9 @@ jobs:
         make start
         make wait
 
-    - name: Prepare DB
+    - name: Seed data
       run: |
-        SEED_FILE="tests/${{ matrix.test }}/seed.sql"
-        if [[ -f "$SEED_FILE" ]]; then
-          PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 5432 -d dsw -a -f "$SEED_FILE"
-        fi
+        python tools/seeder.py "tests/${{ matrix.test }}"
 
     - name: Run load test
       run: |
@@ -100,7 +94,7 @@ jobs:
           --headless \
           --only-summary \
           --host=http://localhost:3000 \
-          --users=100 \
+          --users=50 \
           --spawn-rate=10 \
           --run-time=3m
 

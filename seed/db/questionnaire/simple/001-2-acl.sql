@@ -1,0 +1,1 @@
+INSERT INTO public.questionnaire_acl_user (uuid, user_uuid, perms, questionnaire_uuid) VALUES ('d92cef64-80ed-45ad-9ee3-977d8e68e385', 'ec6f8e90-2a91-49ec-aa3f-9eab2267fc66', '{VIEW,COMMENT,EDIT,ADMIN}', 'a1cdbff5-c60e-4779-8929-e086a2da9fba');

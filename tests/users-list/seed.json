@@ -1,0 +1,8 @@
+{
+  "db": {
+    "scripts": [
+      "user/random_248.sql"
+    ]
+  },
+  "s3": {}
+}

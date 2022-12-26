@@ -50,10 +50,17 @@ class BasicUser(HttpUser):
         self.client.post(
             url='/knowledge-models/preview',
             headers=self.headers,
+            json={
+                'events': [],
+                'packageId': 'dsw:root:2.4.0',
+                'tagUuids': [],
+            },
         )
         # Get preview for tags
         tags_count = random.randint(0, len(TAGS))
-        tags = random.shuffle(TAGS)[0:tags_count]
+        tags = [tag for tag in TAGS]
+        random.shuffle(tags)
+        tags = tags[0:tags_count]
         questionnaire = {
             'name': fake.job(),
             'packageId': 'dsw:root:2.4.0',

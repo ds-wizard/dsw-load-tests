@@ -1,0 +1,9 @@
+{
+  "db": {
+    "scripts": [
+      "package/dsw-root/*.sql",
+      "questionnaire/simple/001-*.sql"
+    ]
+  },
+  "s3": {}
+}
