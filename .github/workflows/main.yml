@@ -9,6 +9,18 @@ on:
         description: 'Wizard Server image'
         required: false
         default: 'dswbot/wizard-server:develop'
+      users:
+        description: 'Users'
+        required: false
+        default: '50'
+      spawn_rate:
+        description: 'Spawn Rate'
+        required: false
+        default: '10'
+      run_time:
+        description: 'Run Time'
+        required: false
+        default: '3m'
 
 jobs:
   load-test:
@@ -38,12 +50,27 @@ jobs:
       uses: allenevans/set-env@v2.2.0
       with:
         SERVER_IMAGE: ${{ github.event.client_payload.server_image }}
+        LOCUST_USERS: ${{ github.event.client_payload.users }}
+        LOCUST_SPAWN_RATE: ${{ github.event.client_payload.spawn_rate }}
+        LOCUST_RUN_TIME: ${{ github.event.client_payload.run_time }}
 
     - name: Set variables from workflow dispatch
       if: github.event_name == 'workflow_dispatch'
       uses: allenevans/set-env@v2.2.0
       with:
         SERVER_IMAGE: ${{ github.event.inputs.server_image }}
+        LOCUST_USERS: ${{ github.event.inputs.users }}
+        LOCUST_SPAWN_RATE: ${{ github.event.inputs.spawn_rate }}
+        LOCUST_RUN_TIME: ${{ github.event.inputs.run_time }}
+
+    - name: Set variables from workflow dispatch
+      if: github.event_name != 'workflow_dispatch' && github.event_name != 'repository_dispatch'
+      uses: allenevans/set-env@v2.2.0
+      with:
+        SERVER_IMAGE: 'dswbot/wizard-server:develop'
+        LOCUST_USERS: '50'
+        LOCUST_SPAWN_RATE: '10'
+        LOCUST_RUN_TIME: '3m'
 
     - name: Docker login [private]
       if: github.event_name != 'pull_request'
@@ -94,9 +121,9 @@ jobs:
           --headless \
           --only-summary \
           --host=http://localhost:3000 \
-          --users=50 \
-          --spawn-rate=10 \
-          --run-time=3m
+          --users=$LOCUST_USERS \
+          --spawn-rate=$LOCUST_SPAWN_RATE \
+          --run-time=$LOCUST_RUN_TIME
 
     - name: Convert results to JSON
       run: |
