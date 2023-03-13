@@ -8,7 +8,7 @@ on:
       server_image:
         description: 'Wizard Server image'
         required: false
-        default: 'docker.ds-wizard.org/wizard-server:develop'
+        default: 'dswbot/wizard-server:develop'
 
 jobs:
   load-test:
