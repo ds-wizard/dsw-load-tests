@@ -12,11 +12,11 @@ on:
       users:
         description: 'Users'
         required: false
-        default: '50'
+        default: '20'
       spawn_rate:
         description: 'Spawn Rate'
         required: false
-        default: '10'
+        default: '5'
       run_time:
         description: 'Run Time'
         required: false
@@ -63,13 +63,13 @@ jobs:
         LOCUST_SPAWN_RATE: ${{ github.event.inputs.spawn_rate }}
         LOCUST_RUN_TIME: ${{ github.event.inputs.run_time }}
 
-    - name: Set variables from workflow dispatch
+    - name: Set environment variables (default)
       if: github.event_name != 'workflow_dispatch' && github.event_name != 'repository_dispatch'
       uses: allenevans/set-env@v2.2.0
       with:
         SERVER_IMAGE: 'dswbot/wizard-server:develop'
-        LOCUST_USERS: '50'
-        LOCUST_SPAWN_RATE: '10'
+        LOCUST_USERS: '20'
+        LOCUST_SPAWN_RATE: '5'
         LOCUST_RUN_TIME: '3m'
 
     - name: Docker login [private]

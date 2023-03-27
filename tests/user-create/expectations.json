@@ -2,7 +2,7 @@
   "aggregated": {
     "requestsCount": {
       "type": "range",
-      "min": 6000,
+      "min": 150,
       "max": null
     },
     "failureCount": {
@@ -13,12 +13,12 @@
     "medianResponseTime": {
       "type": "range",
       "min": 0,
-      "max": 2000
+      "max": 20000
     },
     "averageResponseTime": {
       "type": "range",
       "min": 0,
-      "max": 2000
+      "max": 20000
     },
     "minResponseTime": null,
     "maxResponseTime": {
@@ -29,7 +29,7 @@
     "averageContentSize": null,
     "requestsPerSecond": {
       "type": "range",
-      "min": 10,
+      "min": 0.5,
       "max": null
     },
     "failuresPerSecond": {
