@@ -3,6 +3,8 @@ name: Load Tests
 on:
   push:
   repository_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
   workflow_dispatch:
     inputs:
       server_image:
@@ -139,5 +141,19 @@ jobs:
           ${{ matrix.test }}.json
 
     - name: Check results
+      shell: bash {0}
       run: |
-        python tools/check_results.py ${{ matrix.test }}.json tests/${{ matrix.test }}/expectations.json
+        python tools/check_results.py $TEST_NAME.json tests/$TEST_NAME/expectations.json
+        if [ "$?" -gt "0" ]; then
+          echo "-----------------------------"
+          echo "Sending Slack notification..."
+          bash .github/scripts/slack-notify.sh "$WEBHOOK_URL" "$IMAGE" "$TEST_NAME" "$REPO" "$RUN" "$GH_EVENT"
+          exit 1
+        fi
+      env:
+        IMAGE: ${{ env.SERVER_IMAGE }}
+        WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        REPO: ${{ github.repository }}
+        RUN: ${{ github.run_id }}
+        TEST_NAME: ${{ matrix.test }}
+        GH_EVENT: ${{ github.event_name }}
