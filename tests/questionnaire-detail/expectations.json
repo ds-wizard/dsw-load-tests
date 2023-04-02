@@ -29,7 +29,7 @@
     "averageContentSize": null,
     "requestsPerSecond": {
       "type": "range",
-      "min": 4,
+      "min": 3,
       "max": null
     },
     "failuresPerSecond": {

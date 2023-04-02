@@ -1,6 +1,7 @@
 import faker
 import json
 import random
+import uuid
 
 from locust import HttpUser, task, between
 
@@ -118,24 +119,6 @@ class BasicUser(HttpUser):
                 'lastName': user['lastName'],
                 'affiliation': user['affiliation'],
                 'role': user['role'],
-                'active': random.choice([True, False]),
-            },
-            headers=self.headers,
-        )
-
-    @task(3)
-    def update_user_all(self):
-        user = random.choice(self.users)
-        first_name = fake.first_name()
-        last_name = fake.last_name()
-        self.client.put(
-            url=f'/users/{user["uuid"]}',
-            json={
-                'email': f'{first_name}.{last_name}@{fake.domain_name()}',
-                'firstName': first_name,
-                'lastName': last_name,
-                'affiliation': fake.company(),
-                'role': random.choice(ROLES),
                 'active': random.choice([True, False]),
             },
             headers=self.headers,
