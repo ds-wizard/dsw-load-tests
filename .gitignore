@@ -2,6 +2,6 @@ __pycache__
 env
 dsw/docker-compose.yml
 
-/*.csv
-/*.html
-/*.json
+*.csv
+*.html
+*.json
