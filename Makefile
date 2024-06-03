@@ -1,44 +1,95 @@
 .PHONE: report.all
 report.all:
-	$(MAKE) report.config-bootstrap.all
-	$(MAKE) report.document-template-detail.all
-	$(MAKE) report.document-template-list.all
-	$(MAKE) report.document-template-suggestions.all
-	$(MAKE) report.package-detail.all
-	$(MAKE) report.package-list.all
-	$(MAKE) report.package-suggestions.all
-	$(MAKE) report.questionnaire-detail.all
-	$(MAKE) report.questionnaire-detail-documents.all
-	$(MAKE) report.questionnaire-detail-events.all
-	$(MAKE) report.questionnaire-detail-report.all
-	$(MAKE) report.questionnaire-detail-versions.all
-	$(MAKE) report.questionnaire-importer-suggestion.all
-	$(MAKE) report.questionnaire-list.all
-	$(MAKE) report.questionnaire-project-tag-suggestion.all
+	. env/bin/activate
+	rm -f csv/*
+	rm -f html/*
+	$(MAKE) report.config_bootstrap.all
+	sleep 5
+	$(MAKE) report.document_template_detail.all
+	sleep 5
+	$(MAKE) report.document_template_list.all
+	sleep 5
+	$(MAKE) report.document_template_suggestions.all
+	sleep 5
+	$(MAKE) report.package_detail.all
+	sleep 5
+	$(MAKE) report.package_list.all
+	sleep 5
+	$(MAKE) report.package_suggestions.all
+	sleep 5
+	$(MAKE) report.questionnaire_detail.all
+	sleep 5
+	$(MAKE) report.questionnaire_detail_comments.all
+	sleep 5
+	$(MAKE) report.questionnaire_detail_documents.all
+	sleep 5
+	$(MAKE) report.questionnaire_detail_events.all
+	sleep 5
+	$(MAKE) report.questionnaire_detail_questionnaire.all
+	sleep 5
+	$(MAKE) report.questionnaire_detail_report.all
+	sleep 5
+	$(MAKE) report.questionnaire_detail_settings.all
+	sleep 5
+	$(MAKE) report.questionnaire_detail_versions.all
+	sleep 5
+	$(MAKE) report.questionnaire_importer_suggestion.all
+	sleep 5
+	$(MAKE) report.questionnaire_list.all
+	sleep 5
+	$(MAKE) report.questionnaire_project_tag_suggestion.all
+	sleep 5
 	$(MAKE) report.usage.all
-	$(MAKE) report.users-list.all
-	$(MAKE) report.users-suggestion.all
+	sleep 5
+	$(MAKE) report.users_list.all
+	sleep 5
+	$(MAKE) report.users_suggestion.all
+	sleep 5
 
 .PHONE: report.fast
 report.fast:
-	$(MAKE) report.config-bootstrap.20
-	$(MAKE) report.document-template-detail.20
-	$(MAKE) report.document-template-list.20
-	$(MAKE) report.document-template-suggestions.20
-	$(MAKE) report.package-detail.20
-	$(MAKE) report.package-list.20
-	$(MAKE) report.package-suggestions.20
-	$(MAKE) report.questionnaire-detail.20
-	$(MAKE) report.questionnaire-detail-documents.20
-	$(MAKE) report.questionnaire-detail-events.20
-	$(MAKE) report.questionnaire-detail-report.20
-	$(MAKE) report.questionnaire-detail-versions.20
-	$(MAKE) report.questionnaire-importer-suggestion.20
-	$(MAKE) report.questionnaire-list.20
-	$(MAKE) report.questionnaire-project-tag-suggestion.20
+	$(MAKE) report.config_bootstrap.20
+	sleep 5
+	$(MAKE) report.document_template_detail.20
+	sleep 5
+	$(MAKE) report.document_template_list.20
+	sleep 5
+	$(MAKE) report.document_template_suggestions.20
+	sleep 5
+	$(MAKE) report.package_detail.20
+	sleep 5
+	$(MAKE) report.package_list.20
+	sleep 5
+	$(MAKE) report.package_suggestions.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_comments.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_documents.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_events.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_questionnaire.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_report.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_settings.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_versions.20
+	sleep 5
+	$(MAKE) report.questionnaire_importer_suggestion.20
+	sleep 5
+	$(MAKE) report.questionnaire_list.20
+	sleep 5
+	$(MAKE) report.questionnaire_project_tag_suggestion.20
+	sleep 5
 	$(MAKE) report.usage.20
-	$(MAKE) report.users-list.20
-	$(MAKE) report.users-suggestion.20
+	sleep 5
+	$(MAKE) report.users_list.20
+	sleep 5
+	$(MAKE) report.users_suggestion.20
+	sleep 5
 
 .PHONY: report.base
 report.base:
@@ -49,435 +100,663 @@ report.base:
           --run-time=20s \
           --only-summary \
           --headless \
-          --csv=csv/$(TEST)-$(USERS) \
-          --html=html/$(TEST)-$(USERS).html
+          --csv=csv/$(TEST)_$(USERS) \
+          --html=html/$(TEST)_$(USERS).html
 
 ########################################################################################################################
 
-.PHONE: report.config-bootstrap.all
-report.config-bootstrap.all:
-	$(MAKE) report.config-bootstrap.20
-	$(MAKE) report.config-bootstrap.40
-	$(MAKE) report.config-bootstrap.80
-	$(MAKE) report.config-bootstrap.160
+.PHONE: report.config_bootstrap.all
+report.config_bootstrap.all:
+	$(MAKE) report.config_bootstrap.20
+	sleep 5
+	$(MAKE) report.config_bootstrap.40
+	sleep 5
+	$(MAKE) report.config_bootstrap.80
+	sleep 5
+	$(MAKE) report.config_bootstrap.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.config-bootstrap.20
-report.config-bootstrap.20:
-	$(MAKE) report.base TEST=config-bootstrap USERS=20
+.PHONY: report.config_bootstrap.20
+report.config_bootstrap.20:
+	$(MAKE) report.base TEST=config_bootstrap USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.config-bootstrap.40
-report.config-bootstrap.40:
-	$(MAKE) report.base TEST=config-bootstrap USERS=40
+.PHONY: report.config_bootstrap.40
+report.config_bootstrap.40:
+	$(MAKE) report.base TEST=config_bootstrap USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.config-bootstrap.80
-report.config-bootstrap.80:
-	$(MAKE) report.base TEST=config-bootstrap USERS=80
+.PHONY: report.config_bootstrap.80
+report.config_bootstrap.80:
+	$(MAKE) report.base TEST=config_bootstrap USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.config-bootstrap.160
-report.config-bootstrap.160:
-	$(MAKE) report.base TEST=config-bootstrap USERS=160
+.PHONY: report.config_bootstrap.160
+report.config_bootstrap.160:
+	$(MAKE) report.base TEST=config_bootstrap USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.document-template-detail.all
-report.document-template-detail.all:
-	$(MAKE) report.document-template-detail.20
-	$(MAKE) report.document-template-detail.40
-	$(MAKE) report.document-template-detail.80
-	$(MAKE) report.document-template-detail.160
+.PHONE: report.document_template_detail.all
+report.document_template_detail.all:
+	$(MAKE) report.document_template_detail.20
+	sleep 5
+	$(MAKE) report.document_template_detail.40
+	sleep 5
+	$(MAKE) report.document_template_detail.80
+	sleep 5
+	$(MAKE) report.document_template_detail.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-detail.20
-report.document-template-detail.20:
-	$(MAKE) report.base TEST=document-template-detail USERS=20
+.PHONY: report.document_template_detail.20
+report.document_template_detail.20:
+	$(MAKE) report.base TEST=document_template_detail USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-detail.40
-report.document-template-detail.40:
-	$(MAKE) report.base TEST=document-template-detail USERS=40
+.PHONY: report.document_template_detail.40
+report.document_template_detail.40:
+	$(MAKE) report.base TEST=document_template_detail USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-detail.80
-report.document-template-detail.80:
-	$(MAKE) report.base TEST=document-template-detail USERS=80
+.PHONY: report.document_template_detail.80
+report.document_template_detail.80:
+	$(MAKE) report.base TEST=document_template_detail USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-detail.160
-report.document-template-detail.160:
-	$(MAKE) report.base TEST=document-template-detail USERS=160
+.PHONY: report.document_template_detail.160
+report.document_template_detail.160:
+	$(MAKE) report.base TEST=document_template_detail USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.document-template-list.all
-report.document-template-list.all:
-	$(MAKE) report.document-template-list.20
-	$(MAKE) report.document-template-list.40
-	$(MAKE) report.document-template-list.80
-	$(MAKE) report.document-template-list.160
+.PHONE: report.document_template_list.all
+report.document_template_list.all:
+	$(MAKE) report.document_template_list.20
+	sleep 5
+	$(MAKE) report.document_template_list.40
+	sleep 5
+	$(MAKE) report.document_template_list.80
+	sleep 5
+	$(MAKE) report.document_template_list.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-list.20
-report.document-template-list.20:
-	$(MAKE) report.base TEST=document-template-list USERS=20
+.PHONY: report.document_template_list.20
+report.document_template_list.20:
+	$(MAKE) report.base TEST=document_template_list USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-list.40
-report.document-template-list.40:
-	$(MAKE) report.base TEST=document-template-list USERS=40
+.PHONY: report.document_template_list.40
+report.document_template_list.40:
+	$(MAKE) report.base TEST=document_template_list USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-list.80
-report.document-template-list.80:
-	$(MAKE) report.base TEST=document-template-list USERS=80
+.PHONY: report.document_template_list.80
+report.document_template_list.80:
+	$(MAKE) report.base TEST=document_template_list USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-list.160
-report.document-template-list.160:
-	$(MAKE) report.base TEST=document-template-list USERS=160
+.PHONY: report.document_template_list.160
+report.document_template_list.160:
+	$(MAKE) report.base TEST=document_template_list USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.document-template-suggestions.all
-report.document-template-suggestions.all:
-	$(MAKE) report.document-template-suggestions.20
-	$(MAKE) report.document-template-suggestions.40
-	$(MAKE) report.document-template-suggestions.80
-	$(MAKE) report.document-template-suggestions.160
+.PHONE: report.document_template_suggestions.all
+report.document_template_suggestions.all:
+	$(MAKE) report.document_template_suggestions.20
+	sleep 5
+	$(MAKE) report.document_template_suggestions.40
+	sleep 5
+	$(MAKE) report.document_template_suggestions.80
+	sleep 5
+	$(MAKE) report.document_template_suggestions.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-suggestions.20
-report.document-template-suggestions.20:
-	$(MAKE) report.base TEST=document-template-suggestions USERS=20
+.PHONY: report.document_template_suggestions.20
+report.document_template_suggestions.20:
+	$(MAKE) report.base TEST=document_template_suggestions USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-suggestions.40
-report.document-template-suggestions.40:
-	$(MAKE) report.base TEST=document-template-suggestions USERS=40
+.PHONY: report.document_template_suggestions.40
+report.document_template_suggestions.40:
+	$(MAKE) report.base TEST=document_template_suggestions USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-suggestions.80
-report.document-template-suggestions.80:
-	$(MAKE) report.base TEST=document-template-suggestions USERS=80
+.PHONY: report.document_template_suggestions.80
+report.document_template_suggestions.80:
+	$(MAKE) report.base TEST=document_template_suggestions USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.document-template-suggestions.160
-report.document-template-suggestions.160:
-	$(MAKE) report.base TEST=document-template-suggestions USERS=160
+.PHONY: report.document_template_suggestions.160
+report.document_template_suggestions.160:
+	$(MAKE) report.base TEST=document_template_suggestions USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.package-detail.all
-report.package-detail.all:
-	$(MAKE) report.package-detail.20
-	$(MAKE) report.package-detail.40
-	$(MAKE) report.package-detail.80
-	$(MAKE) report.package-detail.160
+.PHONE: report.package_detail.all
+report.package_detail.all:
+	$(MAKE) report.package_detail.20
+	sleep 5
+	$(MAKE) report.package_detail.40
+	sleep 5
+	$(MAKE) report.package_detail.80
+	sleep 5
+	$(MAKE) report.package_detail.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-detail.20
-report.package-detail.20:
-	$(MAKE) report.base TEST=package-detail USERS=20
+.PHONY: report.package_detail.20
+report.package_detail.20:
+	$(MAKE) report.base TEST=package_detail USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-detail.40
-report.package-detail.40:
-	$(MAKE) report.base TEST=package-detail USERS=40
+.PHONY: report.package_detail.40
+report.package_detail.40:
+	$(MAKE) report.base TEST=package_detail USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-detail.80
-report.package-detail.80:
-	$(MAKE) report.base TEST=package-detail USERS=80
+.PHONY: report.package_detail.80
+report.package_detail.80:
+	$(MAKE) report.base TEST=package_detail USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-detail.160
-report.package-detail.160:
-	$(MAKE) report.base TEST=package-detail USERS=160
+.PHONY: report.package_detail.160
+report.package_detail.160:
+	$(MAKE) report.base TEST=package_detail USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.package-list.all
-report.package-list.all:
-	$(MAKE) report.package-list.20
-	$(MAKE) report.package-list.40
-	$(MAKE) report.package-list.80
-	$(MAKE) report.package-list.160
+.PHONE: report.package_list.all
+report.package_list.all:
+	$(MAKE) report.package_list.20
+	sleep 5
+	$(MAKE) report.package_list.40
+	sleep 5
+	$(MAKE) report.package_list.80
+	sleep 5
+	$(MAKE) report.package_list.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-list.20
-report.package-list.20:
-	$(MAKE) report.base TEST=package-list USERS=20
+.PHONY: report.package_list.20
+report.package_list.20:
+	$(MAKE) report.base TEST=package_list USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-list.40
-report.package-list.40:
-	$(MAKE) report.base TEST=package-list USERS=40
+.PHONY: report.package_list.40
+report.package_list.40:
+	$(MAKE) report.base TEST=package_list USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-list.80
-report.package-list.80:
-	$(MAKE) report.base TEST=package-list USERS=80
+.PHONY: report.package_list.80
+report.package_list.80:
+	$(MAKE) report.base TEST=package_list USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-list.160
-report.package-list.160:
-	$(MAKE) report.base TEST=package-list USERS=160
+.PHONY: report.package_list.160
+report.package_list.160:
+	$(MAKE) report.base TEST=package_list USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.package-suggestions.all
-report.package-suggestions.all:
-	$(MAKE) report.package-suggestions.20
-	$(MAKE) report.package-suggestions.40
-	$(MAKE) report.package-suggestions.80
-	$(MAKE) report.package-suggestions.160
+.PHONE: report.package_suggestions.all
+report.package_suggestions.all:
+	$(MAKE) report.package_suggestions.20
+	sleep 5
+	$(MAKE) report.package_suggestions.40
+	sleep 5
+	$(MAKE) report.package_suggestions.80
+	sleep 5
+	$(MAKE) report.package_suggestions.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-suggestions.20
-report.package-suggestions.20:
-	$(MAKE) report.base TEST=package-suggestions USERS=20
+.PHONY: report.package_suggestions.20
+report.package_suggestions.20:
+	$(MAKE) report.base TEST=package_suggestions USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-suggestions.40
-report.package-suggestions.40:
-	$(MAKE) report.base TEST=package-suggestions USERS=40
+.PHONY: report.package_suggestions.40
+report.package_suggestions.40:
+	$(MAKE) report.base TEST=package_suggestions USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-suggestions.80
-report.package-suggestions.80:
-	$(MAKE) report.base TEST=package-suggestions USERS=80
+.PHONY: report.package_suggestions.80
+report.package_suggestions.80:
+	$(MAKE) report.base TEST=package_suggestions USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package-suggestions.160
-report.package-suggestions.160:
-	$(MAKE) report.base TEST=package-suggestions USERS=160
+.PHONY: report.package_suggestions.160
+report.package_suggestions.160:
+	$(MAKE) report.base TEST=package_suggestions USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.questionnaire-detail.all
-report.questionnaire-detail.all:
-	$(MAKE) report.questionnaire-detail.20
+.PHONE: report.questionnaire_detail.all
+report.questionnaire_detail.all:
+	$(MAKE) report.questionnaire_detail.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail.40
+	sleep 5
+	$(MAKE) report.questionnaire_detail.80
+	sleep 5
+	$(MAKE) report.questionnaire_detail.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-detail.20
-report.questionnaire-detail.20:
-	$(MAKE) report.base TEST=questionnaire-detail USERS=20
+.PHONY: report.questionnaire_detail.20
+report.questionnaire_detail.20:
+	$(MAKE) report.base TEST=questionnaire_detail USERS=20
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_detail.40
+report.questionnaire_detail.40:
+	$(MAKE) report.base TEST=questionnaire_detail USERS=40
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_detail.80
+report.questionnaire_detail.80:
+	$(MAKE) report.base TEST=questionnaire_detail USERS=80
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_detail.160
+report.questionnaire_detail.160:
+	$(MAKE) report.base TEST=questionnaire_detail USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.questionnaire-detail-documents.all
-report.questionnaire-detail-documents.all:
-	$(MAKE) report.questionnaire-detail-documents.20
-	$(MAKE) report.questionnaire-detail-documents.40
-	$(MAKE) report.questionnaire-detail-documents.80
-	$(MAKE) report.questionnaire-detail-documents.160
+.PHONE: report.questionnaire_detail_comments.all
+report.questionnaire_detail_comments.all:
+	$(MAKE) report.questionnaire_detail_comments.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_comments.40
+	sleep 5
+	$(MAKE) report.questionnaire_detail_comments.80
+	sleep 5
+	$(MAKE) report.questionnaire_detail_comments.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-detail-documents.20
-report.questionnaire-detail-documents.20:
-	$(MAKE) report.base TEST=questionnaire-detail-documents USERS=20
+.PHONY: report.questionnaire_detail_comments.20
+report.questionnaire_detail_comments.20:
+	$(MAKE) report.base TEST=questionnaire_detail_comments USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-detail-documents.40
-report.questionnaire-detail-documents.40:
-	$(MAKE) report.base TEST=questionnaire-detail-documents USERS=40
+.PHONY: report.questionnaire_detail_comments.40
+report.questionnaire_detail_comments.40:
+	$(MAKE) report.base TEST=questionnaire_detail_comments USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-detail-documents.80
-report.questionnaire-detail-documents.80:
-	$(MAKE) report.base TEST=questionnaire-detail-documents USERS=80
+.PHONY: report.questionnaire_detail_comments.80
+report.questionnaire_detail_comments.80:
+	$(MAKE) report.base TEST=questionnaire_detail_comments USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-detail-documents.160
-report.questionnaire-detail-documents.160:
-	$(MAKE) report.base TEST=questionnaire-detail-documents USERS=160
+.PHONY: report.questionnaire_detail_comments.160
+report.questionnaire_detail_comments.160:
+	$(MAKE) report.base TEST=questionnaire_detail_comments USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.questionnaire-detail-events.all
-report.questionnaire-detail-events.all:
-	$(MAKE) report.questionnaire-detail-events.20
+.PHONE: report.questionnaire_detail_documents.all
+report.questionnaire_detail_documents.all:
+	$(MAKE) report.questionnaire_detail_documents.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_documents.40
+	sleep 5
+	$(MAKE) report.questionnaire_detail_documents.80
+	sleep 5
+	$(MAKE) report.questionnaire_detail_documents.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-detail-events.20
-report.questionnaire-detail-events.20:
-	$(MAKE) report.base TEST=questionnaire-detail-events USERS=20
+.PHONY: report.questionnaire_detail_documents.20
+report.questionnaire_detail_documents.20:
+	$(MAKE) report.base TEST=questionnaire_detail_documents USERS=20
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_detail_documents.40
+report.questionnaire_detail_documents.40:
+	$(MAKE) report.base TEST=questionnaire_detail_documents USERS=40
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_detail_documents.80
+report.questionnaire_detail_documents.80:
+	$(MAKE) report.base TEST=questionnaire_detail_documents USERS=80
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_detail_documents.160
+report.questionnaire_detail_documents.160:
+	$(MAKE) report.base TEST=questionnaire_detail_documents USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.questionnaire-detail-report.all
-report.questionnaire-detail-report.all:
-	$(MAKE) report.questionnaire-detail-report.20
+.PHONE: report.questionnaire_detail_events.all
+report.questionnaire_detail_events.all:
+	$(MAKE) report.questionnaire_detail_events.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_events.40
+	sleep 5
+	$(MAKE) report.questionnaire_detail_events.80
+	sleep 5
+	$(MAKE) report.questionnaire_detail_events.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-detail-report.20
-report.questionnaire-detail-report.20:
-	$(MAKE) report.base TEST=questionnaire-detail-report USERS=20
+.PHONY: report.questionnaire_detail_events.20
+report.questionnaire_detail_events.20:
+	$(MAKE) report.base TEST=questionnaire_detail_events USERS=20
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_detail_events.40
+report.questionnaire_detail_events.40:
+	$(MAKE) report.base TEST=questionnaire_detail_events USERS=40
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_detail_events.80
+report.questionnaire_detail_events.80:
+	$(MAKE) report.base TEST=questionnaire_detail_events USERS=80
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_detail_events.160
+report.questionnaire_detail_events.160:
+	$(MAKE) report.base TEST=questionnaire_detail_events USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.questionnaire-detail-versions.all
-report.questionnaire-detail-versions.all:
-	$(MAKE) report.questionnaire-detail-versions.20
-	$(MAKE) report.questionnaire-detail-versions.40
-	$(MAKE) report.questionnaire-detail-versions.80
-	$(MAKE) report.questionnaire-detail-versions.160
+.PHONE: report.questionnaire_detail_questionnaire.all
+report.questionnaire_detail_questionnaire.all:
+	$(MAKE) report.questionnaire_detail_questionnaire.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_questionnaire.40
+	sleep 5
+	$(MAKE) report.questionnaire_detail_questionnaire.80
+	sleep 5
+	$(MAKE) report.questionnaire_detail_questionnaire.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-detail-versions.20
-report.questionnaire-detail-versions.20:
-	$(MAKE) report.base TEST=questionnaire-detail-versions USERS=20
+.PHONY: report.questionnaire_detail_questionnaire.20
+report.questionnaire_detail_questionnaire.20:
+	$(MAKE) report.base TEST=questionnaire_detail_questionnaire USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-detail-versions.40
-report.questionnaire-detail-versions.40:
-	$(MAKE) report.base TEST=questionnaire-detail-versions USERS=40
+.PHONY: report.questionnaire_detail_questionnaire.40
+report.questionnaire_detail_questionnaire.40:
+	$(MAKE) report.base TEST=questionnaire_detail_questionnaire USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-detail-versions.80
-report.questionnaire-detail-versions.80:
-	$(MAKE) report.base TEST=questionnaire-detail-versions USERS=80
+.PHONY: report.questionnaire_detail_questionnaire.80
+report.questionnaire_detail_questionnaire.80:
+	$(MAKE) report.base TEST=questionnaire_detail_questionnaire USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-detail-versions.160
-report.questionnaire-detail-versions.160:
-	$(MAKE) report.base TEST=questionnaire-detail-versions USERS=160
+.PHONY: report.questionnaire_detail_questionnaire.160
+report.questionnaire_detail_questionnaire.160:
+	$(MAKE) report.base TEST=questionnaire_detail_questionnaire USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.questionnaire-importer-suggestion.all
-report.questionnaire-importer-suggestion.all:
-	$(MAKE) report.questionnaire-importer-suggestion.20
-	$(MAKE) report.questionnaire-importer-suggestion.40
-	$(MAKE) report.questionnaire-importer-suggestion.80
-	$(MAKE) report.questionnaire-importer-suggestion.160
+.PHONE: report.questionnaire_detail_report.all
+report.questionnaire_detail_report.all:
+	$(MAKE) report.questionnaire_detail_report.20
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-importer-suggestion.20
-report.questionnaire-importer-suggestion.20:
-	$(MAKE) report.base TEST=questionnaire-importer-suggestion USERS=20
-
-# ----------------------------------------------------------------------------------------------------------------------
-
-.PHONY: report.questionnaire-importer-suggestion.40
-report.questionnaire-importer-suggestion.40:
-	$(MAKE) report.base TEST=questionnaire-importer-suggestion USERS=40
-
-# ----------------------------------------------------------------------------------------------------------------------
-
-.PHONY: report.questionnaire-importer-suggestion.80
-report.questionnaire-importer-suggestion.80:
-	$(MAKE) report.base TEST=questionnaire-importer-suggestion USERS=80
-
-# ----------------------------------------------------------------------------------------------------------------------
-
-.PHONY: report.questionnaire-importer-suggestion.160
-report.questionnaire-importer-suggestion.160:
-	$(MAKE) report.base TEST=questionnaire-importer-suggestion USERS=160
+.PHONY: report.questionnaire_detail_report.20
+report.questionnaire_detail_report.20:
+	$(MAKE) report.base TEST=questionnaire_detail_report USERS=20
 
 ########################################################################################################################
 
-.PHONE: report.questionnaire-list.all
-report.questionnaire-list.all:
-	$(MAKE) report.questionnaire-list.20
-	$(MAKE) report.questionnaire-list.40
+.PHONE: report.questionnaire_detail_settings.all
+report.questionnaire_detail_settings.all:
+	$(MAKE) report.questionnaire_detail_settings.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_settings.40
+	sleep 5
+	$(MAKE) report.questionnaire_detail_settings.80
+	sleep 5
+	$(MAKE) report.questionnaire_detail_settings.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-list.20
-report.questionnaire-list.20:
-	$(MAKE) report.base TEST=questionnaire-list USERS=20
+.PHONY: report.questionnaire_detail_settings.20
+report.questionnaire_detail_settings.20:
+	$(MAKE) report.base TEST=questionnaire_detail_settings USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-list.40
-report.questionnaire-list.40:
-	$(MAKE) report.base TEST=questionnaire-list USERS=40
+.PHONY: report.questionnaire_detail_settings.40
+report.questionnaire_detail_settings.40:
+	$(MAKE) report.base TEST=questionnaire_detail_settings USERS=40
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_detail_settings.80
+report.questionnaire_detail_settings.80:
+	$(MAKE) report.base TEST=questionnaire_detail_settings USERS=80
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_detail_settings.160
+report.questionnaire_detail_settings.160:
+	$(MAKE) report.base TEST=questionnaire_detail_settings USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.questionnaire-project-tag-suggestion.all
-report.questionnaire-project-tag-suggestion.all:
-	$(MAKE) report.questionnaire-project-tag-suggestion.20
-	$(MAKE) report.questionnaire-project-tag-suggestion.40
-	$(MAKE) report.questionnaire-project-tag-suggestion.80
-	$(MAKE) report.questionnaire-project-tag-suggestion.160
+.PHONE: report.questionnaire_detail_versions.all
+report.questionnaire_detail_versions.all:
+	$(MAKE) report.questionnaire_detail_versions.20
+	sleep 5
+	$(MAKE) report.questionnaire_detail_versions.40
+	sleep 5
+	$(MAKE) report.questionnaire_detail_versions.80
+	sleep 5
+	$(MAKE) report.questionnaire_detail_versions.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-project-tag-suggestion.20
-report.questionnaire-project-tag-suggestion.20:
-	$(MAKE) report.base TEST=questionnaire-project-tag-suggestion USERS=20
+.PHONY: report.questionnaire_detail_versions.20
+report.questionnaire_detail_versions.20:
+	$(MAKE) report.base TEST=questionnaire_detail_versions USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-project-tag-suggestion.40
-report.questionnaire-project-tag-suggestion.40:
-	$(MAKE) report.base TEST=questionnaire-project-tag-suggestion USERS=40
+.PHONY: report.questionnaire_detail_versions.40
+report.questionnaire_detail_versions.40:
+	$(MAKE) report.base TEST=questionnaire_detail_versions USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-project-tag-suggestion.80
-report.questionnaire-project-tag-suggestion.80:
-	$(MAKE) report.base TEST=questionnaire-project-tag-suggestion USERS=80
+.PHONY: report.questionnaire_detail_versions.80
+report.questionnaire_detail_versions.80:
+	$(MAKE) report.base TEST=questionnaire_detail_versions USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.questionnaire-project-tag-suggestion.160
-report.questionnaire-project-tag-suggestion.160:
-	$(MAKE) report.base TEST=questionnaire-project-tag-suggestion USERS=160
+.PHONY: report.questionnaire_detail_versions.160
+report.questionnaire_detail_versions.160:
+	$(MAKE) report.base TEST=questionnaire_detail_versions USERS=160
+
+########################################################################################################################
+
+.PHONE: report.questionnaire_importer_suggestion.all
+report.questionnaire_importer_suggestion.all:
+	$(MAKE) report.questionnaire_importer_suggestion.20
+	sleep 5
+	$(MAKE) report.questionnaire_importer_suggestion.40
+	sleep 5
+	$(MAKE) report.questionnaire_importer_suggestion.80
+	sleep 5
+	$(MAKE) report.questionnaire_importer_suggestion.160
+	sleep 5
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_importer_suggestion.20
+report.questionnaire_importer_suggestion.20:
+	$(MAKE) report.base TEST=questionnaire_importer_suggestion USERS=20
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_importer_suggestion.40
+report.questionnaire_importer_suggestion.40:
+	$(MAKE) report.base TEST=questionnaire_importer_suggestion USERS=40
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_importer_suggestion.80
+report.questionnaire_importer_suggestion.80:
+	$(MAKE) report.base TEST=questionnaire_importer_suggestion USERS=80
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_importer_suggestion.160
+report.questionnaire_importer_suggestion.160:
+	$(MAKE) report.base TEST=questionnaire_importer_suggestion USERS=160
+
+########################################################################################################################
+
+.PHONE: report.questionnaire_list.all
+report.questionnaire_list.all:
+	$(MAKE) report.questionnaire_list.20
+	sleep 5
+	$(MAKE) report.questionnaire_list.40
+	sleep 5
+	$(MAKE) report.questionnaire_list.80
+	sleep 5
+	$(MAKE) report.questionnaire_list.160
+	sleep 5
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_list.20
+report.questionnaire_list.20:
+	$(MAKE) report.base TEST=questionnaire_list USERS=20
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_list.40
+report.questionnaire_list.40:
+	$(MAKE) report.base TEST=questionnaire_list USERS=40
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_list.80
+report.questionnaire_list.80:
+	$(MAKE) report.base TEST=questionnaire_list USERS=80
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_list.160
+report.questionnaire_list.160:
+	$(MAKE) report.base TEST=questionnaire_list USERS=160
+
+########################################################################################################################
+
+.PHONE: report.questionnaire_project_tag_suggestion.all
+report.questionnaire_project_tag_suggestion.all:
+	$(MAKE) report.questionnaire_project_tag_suggestion.20
+	sleep 5
+	$(MAKE) report.questionnaire_project_tag_suggestion.40
+	sleep 5
+	$(MAKE) report.questionnaire_project_tag_suggestion.80
+	sleep 5
+	$(MAKE) report.questionnaire_project_tag_suggestion.160
+	sleep 5
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_project_tag_suggestion.20
+report.questionnaire_project_tag_suggestion.20:
+	$(MAKE) report.base TEST=questionnaire_project_tag_suggestion USERS=20
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_project_tag_suggestion.40
+report.questionnaire_project_tag_suggestion.40:
+	$(MAKE) report.base TEST=questionnaire_project_tag_suggestion USERS=40
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_project_tag_suggestion.80
+report.questionnaire_project_tag_suggestion.80:
+	$(MAKE) report.base TEST=questionnaire_project_tag_suggestion USERS=80
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+.PHONY: report.questionnaire_project_tag_suggestion.160
+report.questionnaire_project_tag_suggestion.160:
+	$(MAKE) report.base TEST=questionnaire_project_tag_suggestion USERS=160
 
 ########################################################################################################################
 
 .PHONE: report.usage.all
 report.usage.all:
 	$(MAKE) report.usage.20
+	sleep 5
 	$(MAKE) report.usage.40
+	sleep 5
 	$(MAKE) report.usage.80
+	sleep 5
 	$(MAKE) report.usage.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -505,75 +784,83 @@ report.usage.160:
 
 ########################################################################################################################
 
-.PHONE: report.users-list.all
-report.users-list.all:
-	$(MAKE) report.users-list.20
-	$(MAKE) report.users-list.40
-	$(MAKE) report.users-list.80
-	$(MAKE) report.users-list.160
+.PHONE: report.users_list.all
+report.users_list.all:
+	$(MAKE) report.users_list.20
+	sleep 5
+	$(MAKE) report.users_list.40
+	sleep 5
+	$(MAKE) report.users_list.80
+	sleep 5
+	$(MAKE) report.users_list.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.users-list.20
-report.users-list.20:
-	$(MAKE) report.base TEST=users-list USERS=20
+.PHONY: report.users_list.20
+report.users_list.20:
+	$(MAKE) report.base TEST=users_list USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.users-list.40
-report.users-list.40:
-	$(MAKE) report.base TEST=users-list USERS=40
+.PHONY: report.users_list.40
+report.users_list.40:
+	$(MAKE) report.base TEST=users_list USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.users-list.80
-report.users-list.80:
-	$(MAKE) report.base TEST=users-list USERS=80
+.PHONY: report.users_list.80
+report.users_list.80:
+	$(MAKE) report.base TEST=users_list USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.users-list.160
-report.users-list.160:
-	$(MAKE) report.base TEST=users-list USERS=160
+.PHONY: report.users_list.160
+report.users_list.160:
+	$(MAKE) report.base TEST=users_list USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.users-suggestion.all
-report.users-suggestion.all:
-	$(MAKE) report.users-suggestion.20
-	$(MAKE) report.users-suggestion.40
-	$(MAKE) report.users-suggestion.80
-	$(MAKE) report.users-suggestion.160
+.PHONE: report.users_suggestion.all
+report.users_suggestion.all:
+	$(MAKE) report.users_suggestion.20
+	sleep 5
+	$(MAKE) report.users_suggestion.40
+	sleep 5
+	$(MAKE) report.users_suggestion.80
+	sleep 5
+	$(MAKE) report.users_suggestion.160
+	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.users-suggestion.20
-report.users-suggestion.20:
-	$(MAKE) report.base TEST=users-suggestion USERS=20
+.PHONY: report.users_suggestion.20
+report.users_suggestion.20:
+	$(MAKE) report.base TEST=users_suggestion USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.users-suggestion.40
-report.users-suggestion.40:
-	$(MAKE) report.base TEST=users-suggestion USERS=40
+.PHONY: report.users_suggestion.40
+report.users_suggestion.40:
+	$(MAKE) report.base TEST=users_suggestion USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.users-suggestion.80
-report.users-suggestion.80:
-	$(MAKE) report.base TEST=users-suggestion USERS=80
+.PHONY: report.users_suggestion.80
+report.users_suggestion.80:
+	$(MAKE) report.base TEST=users_suggestion USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.users-suggestion.160
-report.users-suggestion.160:
-	$(MAKE) report.base TEST=users-suggestion USERS=160
+.PHONY: report.users_suggestion.160
+report.users_suggestion.160:
+	$(MAKE) report.base TEST=users_suggestion USERS=160
 
 ########################################################################################################################
 
 .PHONY: locust.gui
-open:
-	@locust -f tests/questionnaire-list/locustfile.py \
+locust.gui:
+	@locust -f tests/questionnaire_list/locustfile.py \
           --host=https://researchers.load.ds-wizard.org/wizard-api \
           --users=5 \
           --spawn-rate=1 \

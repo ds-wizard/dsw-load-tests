@@ -1,4 +1,4 @@
-def create_dashboard(fast_targets: str, slow_targets: str):
+def create_dashboard(panels: [str]):
     return """{
   "annotations": {
     "list": [
@@ -29,6 +29,30 @@ def create_dashboard(fast_targets: str, slow_targets: str):
   "links": [],
   "liveNow": false,
   "panels": [
+    """ + ",".join([create_panel(panel) for panel in panels]) + """
+  ],
+  "refresh": "",
+  "revision": 1,
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {},
+  "time": {
+    "from": "2024-06-23T00:00:00.000Z",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Wizard Load Test (generated)",
+  "uid": "JylzGgGIp",
+  "version": 24,
+  "weekStart": ""
+}
+"""
+
+def create_panel(param):
+    (user_count, targets) = param
+    return """
     {
       "datasource": {
         "type": "postgres",
@@ -57,7 +81,8 @@ def create_dashboard(fast_targets: str, slow_targets: str):
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
-              "type": "linear"
+              "log": 10,
+              "type": "symlog"
             },
             "showPoints": "auto",
             "spanNulls": false,
@@ -70,8 +95,6 @@ def create_dashboard(fast_targets: str, slow_targets: str):
             }
           },
           "mappings": [],
-          "max": 1000,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -90,8 +113,8 @@ def create_dashboard(fast_targets: str, slow_targets: str):
         "overrides": []
       },
       "gridPos": {
-        "h": 31,
-        "w": 11,
+        "h": 22,
+        "w": 23,
         "x": 0,
         "y": 0
       },
@@ -108,155 +131,14 @@ def create_dashboard(fast_targets: str, slow_targets: str):
           "sort": "none"
         }
       },
-      "targets": [""" + fast_targets + """],
-      "title": "Fast endpoints",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "postgres",
-        "uid": "p6FeWRMIz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ms"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 31,
-        "w": 11,
-        "x": 11,
-        "y": 0
-      },
-      "id": 3,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [""" + slow_targets + """],
-      "title": "Slow endpoints",
+      "targets": [""" + targets + """ ],
+      "title": "Endpoints (""" + str(user_count) + """ users)",
       "type": "timeseries"
     }
-  ],
-  "refresh": "",
-  "revision": 1,
-  "schemaVersion": 38,
-  "style": "dark",
-  "tags": [],
-  "templating": {
-    "list": [
-      {
-        "current": {
-          "selected": false,
-          "text": "20",
-          "value": "20"
-        },
-        "hide": 0,
-        "includeAll": false,
-        "label": "URL",
-        "multi": false,
-        "name": "users",
-        "options": [
-          {
-            "selected": true,
-            "text": "20",
-            "value": "20"
-          },
-          {
-            "selected": false,
-            "text": "40",
-            "value": "40"
-          },
-          {
-            "selected": false,
-            "text": "80",
-            "value": "80"
-          },
-          {
-            "selected": false,
-            "text": "160",
-            "value": "160"
-          }
-        ],
-        "query": "20,40,80,160",
-        "queryValue": "",
-        "skipUrlSync": false,
-        "type": "custom"
-      }
-    ]
-  },
-  "time": {
-    "from": "now-30m",
-    "to": "now"
-  },
-  "timepicker": {},
-  "timezone": "",
-  "title": "Wizard Load Test (generated)",
-  "uid": "JylzGgGIp",
-  "version": 24,
-  "weekStart": ""
-}
-"""
+    """
 
 
-def create_target(name: str, method: str, condition: str) -> str:
+def create_target(user: int, name: str, method: str, condition: str) -> str:
     return """{
           "datasource": {
             "type": "postgres",
@@ -266,7 +148,7 @@ def create_target(name: str, method: str, condition: str) -> str:
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT created_at as time, avg_time as """ + '\\"' + name + '\\"' + """ FROM endpoint WHERE users = ${users} AND method = '""" + method + """' AND """ + condition + """ ORDER BY time",
+          "rawSql": "SELECT created_at as time, avg_time as """ + '\\"' + name + '\\"' + """ FROM endpoint WHERE users = """ + str(user) + """ AND method = '""" + method + """' AND """ + condition + """ ORDER BY time",
           "refId": \"""" + name + """\",
           "sql": {
             "columns": [

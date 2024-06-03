@@ -7,7 +7,7 @@ from tools.model import Endpoint
 
 
 def load_test(test_name: str, users: int) -> [Endpoint]:
-    with open(f'csv/{test_name}-{users}_stats.csv', encoding='utf-8') as f:
+    with open(f'csv/{test_name}_{users}_stats.csv', encoding='utf-8') as f:
         lines = list(csv.reader(f, delimiter=','))
         endpoints = []
         for line in lines:

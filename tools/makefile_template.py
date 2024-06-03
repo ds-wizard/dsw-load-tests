@@ -26,8 +26,8 @@ report.base:
           --run-time=20s \\
           --only-summary \\
           --headless \\
-          --csv=csv/$(TEST)-$(USERS) \\
-          --html=html/$(TEST)-$(USERS).html"""
+          --csv=csv/$(TEST)_$(USERS) \\
+          --html=html/$(TEST)_$(USERS).html"""
 
 
 def create_report_all(tests: [Test]):
@@ -35,6 +35,7 @@ def create_report_all(tests: [Test]):
     s += 'report.all:\n'
     for test in tests:
         s += f'\t$(MAKE) report.{test.name}.all\n'
+        s += f'\tsleep 5\n'
     return s
 
 
@@ -43,6 +44,7 @@ def create_report_fast(tests: [Test]):
     s += 'report.fast:\n'
     for test in tests:
         s += f'\t$(MAKE) report.{test.name}.20\n'
+        s += f'\tsleep 5\n'
     return s
 
 
@@ -54,6 +56,7 @@ def create_report_for_test(test: Test):
     s += f'report.{test.name}.all:\n'
     for test_variant in test.variants:
         s += f'\t$(MAKE) report.{test.name}.{test_variant.users}\n'
+        s += f'\tsleep 5\n'
     for test_variant in test.variants:
         s += '\n'
         s += '# ----------------------------------------------------------------------------------------------------------------------\n'
@@ -68,8 +71,8 @@ def create_locust_gui():
     return """########################################################################################################################
 
 .PHONY: locust.gui
-open:
-	@locust -f tests/questionnaire-list/locustfile.py \\
+locust.gui:
+	@locust -f tests/questionnaire_list/locustfile.py \\
           --host=https://researchers.load.ds-wizard.org/wizard-api \\
           --users=5 \\
           --spawn-rate=1 \\
