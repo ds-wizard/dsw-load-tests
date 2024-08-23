@@ -38,7 +38,7 @@ def create_dashboard(panels: [str]):
   "tags": [],
   "templating": {},
   "time": {
-    "from": "2024-06-23T00:00:00.000Z",
+    "from": "2024-06-01T00:00:00.000Z",
     "to": "now"
   },
   "timepicker": {},
@@ -121,10 +121,14 @@ def create_panel(param):
       "id": 2,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Last",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "single",
