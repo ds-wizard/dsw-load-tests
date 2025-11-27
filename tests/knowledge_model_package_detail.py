@@ -32,6 +32,6 @@ class BasicUser(AuthorizedBaseTest):
     def run_request(self):
         pkg_id = random.choice(PACKAGE_IDS)
         self.client.get(
-            url=f'/packages/{pkg_id}',
+            url=f'/knowledge-model-packages/{pkg_id}',
             headers=self.headers,
         )

@@ -1,21 +1,18 @@
 .PHONE: report.all
 report.all:
-	. env/bin/activate
-	rm -f csv/*
-	rm -f html/*
-	$(MAKE) report.config_bootstrap.all
-	sleep 5
-	$(MAKE) report.document_template_detail.all
-	sleep 5
-	$(MAKE) report.document_template_list.all
-	sleep 5
-	$(MAKE) report.document_template_suggestions.all
-	sleep 5
-	$(MAKE) report.package_detail.all
-	sleep 5
-	$(MAKE) report.package_list.all
-	sleep 5
-	$(MAKE) report.package_suggestions.all
+#	$(MAKE) report.config_bootstrap.all
+#	sleep 5
+#	$(MAKE) report.document_template_detail.all
+#	sleep 5
+#	$(MAKE) report.document_template_list.all
+#	sleep 5
+#	$(MAKE) report.document_template_suggestions.all
+#	sleep 5
+#	$(MAKE) report.knowledge_model_package_detail.all
+#	sleep 5
+#	$(MAKE) report.knowledge_model_package_list.all
+#	sleep 5
+	$(MAKE) report.knowledge_model_package_suggestions.all
 	sleep 5
 	$(MAKE) report.questionnaire_detail.all
 	sleep 5
@@ -56,11 +53,11 @@ report.fast:
 	sleep 5
 	$(MAKE) report.document_template_suggestions.20
 	sleep 5
-	$(MAKE) report.package_detail.20
+	$(MAKE) report.knowledge_model_package_detail.20
 	sleep 5
-	$(MAKE) report.package_list.20
+	$(MAKE) report.knowledge_model_package_list.20
 	sleep 5
-	$(MAKE) report.package_suggestions.20
+	$(MAKE) report.knowledge_model_package_suggestions.20
 	sleep 5
 	$(MAKE) report.questionnaire_detail.20
 	sleep 5
@@ -253,114 +250,114 @@ report.document_template_suggestions.160:
 
 ########################################################################################################################
 
-.PHONE: report.package_detail.all
-report.package_detail.all:
-	$(MAKE) report.package_detail.20
+.PHONE: report.knowledge_model_package_detail.all
+report.knowledge_model_package_detail.all:
+	$(MAKE) report.knowledge_model_package_detail.20
 	sleep 5
-	$(MAKE) report.package_detail.40
+	$(MAKE) report.knowledge_model_package_detail.40
 	sleep 5
-	$(MAKE) report.package_detail.80
+	$(MAKE) report.knowledge_model_package_detail.80
 	sleep 5
-	$(MAKE) report.package_detail.160
+	$(MAKE) report.knowledge_model_package_detail.160
 	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_detail.20
-report.package_detail.20:
-	$(MAKE) report.base TEST=package_detail USERS=20
+.PHONY: report.knowledge_model_package_detail.20
+report.knowledge_model_package_detail.20:
+	$(MAKE) report.base TEST=knowledge_model_package_detail USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_detail.40
-report.package_detail.40:
-	$(MAKE) report.base TEST=package_detail USERS=40
+.PHONY: report.knowledge_model_package_detail.40
+report.knowledge_model_package_detail.40:
+	$(MAKE) report.base TEST=knowledge_model_package_detail USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_detail.80
-report.package_detail.80:
-	$(MAKE) report.base TEST=package_detail USERS=80
+.PHONY: report.knowledge_model_package_detail.80
+report.knowledge_model_package_detail.80:
+	$(MAKE) report.base TEST=knowledge_model_package_detail USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_detail.160
-report.package_detail.160:
-	$(MAKE) report.base TEST=package_detail USERS=160
+.PHONY: report.knowledge_model_package_detail.160
+report.knowledge_model_package_detail.160:
+	$(MAKE) report.base TEST=knowledge_model_package_detail USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.package_list.all
-report.package_list.all:
-	$(MAKE) report.package_list.20
+.PHONE: report.knowledge_model_package_list.all
+report.knowledge_model_package_list.all:
+	$(MAKE) report.knowledge_model_package_list.20
 	sleep 5
-	$(MAKE) report.package_list.40
+	$(MAKE) report.knowledge_model_package_list.40
 	sleep 5
-	$(MAKE) report.package_list.80
+	$(MAKE) report.knowledge_model_package_list.80
 	sleep 5
-	$(MAKE) report.package_list.160
+	$(MAKE) report.knowledge_model_package_list.160
 	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_list.20
-report.package_list.20:
-	$(MAKE) report.base TEST=package_list USERS=20
+.PHONY: report.knowledge_model_package_list.20
+report.knowledge_model_package_list.20:
+	$(MAKE) report.base TEST=knowledge_model_package_list USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_list.40
-report.package_list.40:
-	$(MAKE) report.base TEST=package_list USERS=40
+.PHONY: report.knowledge_model_package_list.40
+report.knowledge_model_package_list.40:
+	$(MAKE) report.base TEST=knowledge_model_package_list USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_list.80
-report.package_list.80:
-	$(MAKE) report.base TEST=package_list USERS=80
+.PHONY: report.knowledge_model_package_list.80
+report.knowledge_model_package_list.80:
+	$(MAKE) report.base TEST=knowledge_model_package_list USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_list.160
-report.package_list.160:
-	$(MAKE) report.base TEST=package_list USERS=160
+.PHONY: report.knowledge_model_package_list.160
+report.knowledge_model_package_list.160:
+	$(MAKE) report.base TEST=knowledge_model_package_list USERS=160
 
 ########################################################################################################################
 
-.PHONE: report.package_suggestions.all
-report.package_suggestions.all:
-	$(MAKE) report.package_suggestions.20
+.PHONE: report.knowledge_model_package_suggestions.all
+report.knowledge_model_package_suggestions.all:
+	$(MAKE) report.knowledge_model_package_suggestions.20
 	sleep 5
-	$(MAKE) report.package_suggestions.40
+	$(MAKE) report.knowledge_model_package_suggestions.40
 	sleep 5
-	$(MAKE) report.package_suggestions.80
+	$(MAKE) report.knowledge_model_package_suggestions.80
 	sleep 5
-	$(MAKE) report.package_suggestions.160
+	$(MAKE) report.knowledge_model_package_suggestions.160
 	sleep 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_suggestions.20
-report.package_suggestions.20:
-	$(MAKE) report.base TEST=package_suggestions USERS=20
+.PHONY: report.knowledge_model_package_suggestions.20
+report.knowledge_model_package_suggestions.20:
+	$(MAKE) report.base TEST=knowledge_model_package_suggestions USERS=20
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_suggestions.40
-report.package_suggestions.40:
-	$(MAKE) report.base TEST=package_suggestions USERS=40
+.PHONY: report.knowledge_model_package_suggestions.40
+report.knowledge_model_package_suggestions.40:
+	$(MAKE) report.base TEST=knowledge_model_package_suggestions USERS=40
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_suggestions.80
-report.package_suggestions.80:
-	$(MAKE) report.base TEST=package_suggestions USERS=80
+.PHONY: report.knowledge_model_package_suggestions.80
+report.knowledge_model_package_suggestions.80:
+	$(MAKE) report.base TEST=knowledge_model_package_suggestions USERS=80
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-.PHONY: report.package_suggestions.160
-report.package_suggestions.160:
-	$(MAKE) report.base TEST=package_suggestions USERS=160
+.PHONY: report.knowledge_model_package_suggestions.160
+report.knowledge_model_package_suggestions.160:
+	$(MAKE) report.base TEST=knowledge_model_package_suggestions USERS=160
 
 ########################################################################################################################
 

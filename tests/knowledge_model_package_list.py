@@ -8,6 +8,6 @@ class BasicUser(AuthorizedBaseTest):
     @task(5)
     def run_request(self):
         self.client.get(
-            url='/packages/suggestions',
+            url='/knowledge-model-packages',
             headers=self.headers,
         )
