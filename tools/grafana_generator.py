@@ -1,13 +1,13 @@
 import subprocess
 
-import tests.questionnaire_detail as questionnaire_detail
-import tests.questionnaire_detail_comments as questionnaire_detail_comments
-import tests.questionnaire_detail_documents as questionnaire_detail_documents
-import tests.questionnaire_detail_events as questionnaire_detail_events
-import tests.questionnaire_detail_questionnaire as questionnaire_detail_questionnaire
-import tests.questionnaire_detail_report as questionnaire_detail_report
-import tests.questionnaire_detail_settings as questionnaire_detail_settings
-import tests.questionnaire_detail_versions as questionnaire_detail_versions
+import tests.project_detail as project_detail
+import tests.project_detail_comments as project_detail_comments
+import tests.project_detail_documents as project_detail_documents
+import tests.project_detail_events as project_detail_events
+import tests.project_detail_questionnaire as project_detail_questionnaire
+import tests.project_detail_report as project_detail_report
+import tests.project_detail_settings as project_detail_settings
+import tests.project_detail_versions as project_detail_versions
 from tools.grafana_template import create_target, create_dashboard
 
 
@@ -20,17 +20,17 @@ def create_targets_array(user):
         create_target(user, "GET /wizard-api/knowledge-model-packages", "GET", "url = '/wizard-api/knowledge-model-packages'"),
         create_target(user, "GET /wizard-api/knowledge-model-packages/suggestions", "GET", "url = '/wizard-api/knowledge-model-packages/suggestions'"),
         create_target(user, "GET /wizard-api/knowledge-model-packages/<id>", "GET","url LIKE '/wizard-api/knowledge-model-packages/%' AND url != '/wizard-api/knowledge-model-packages/suggestions'"),
-        create_target(user, "GET /wizard-api/questionnaires", "GET", "url = '/wizard-api/questionnaires'"),
-        create_target(user, "GET /wizard-api/questionnaires/<id>", "GET",f"""url = '/wizard-api/questionnaires/{questionnaire_detail.QTN_UUID}'"""),
-        create_target(user, "GET /wizard-api/questionnaires/<id>/comments", "GET",f"""url = '/wizard-api/questionnaires/{questionnaire_detail_comments.QTN_UUID}?path={questionnaire_detail_comments.PATH}'"""),
-        create_target(user, "GET /wizard-api/questionnaires/<id>/documents", "GET",f"""url = '/wizard-api/questionnaires/{questionnaire_detail_documents.QTN_UUID}'"""),
-        create_target(user, "GET /wizard-api/questionnaires/<id>/events", "GET",f"""url = '/wizard-api/questionnaires/{questionnaire_detail_events.QTN_UUID}'"""),
-        create_target(user, "GET /wizard-api/questionnaires/<id>/questionnaire", "GET",f"""url = '/wizard-api/questionnaires/{questionnaire_detail_questionnaire.QTN_UUID}'"""),
-        create_target(user, "GET /wizard-api/questionnaires/<id>/report", "GET",f"""url = '/wizard-api/questionnaires/{questionnaire_detail_report.QTN_UUID}'"""),
-        create_target(user, "GET /wizard-api/questionnaires/<id>/settings", "GET",f"""url = '/wizard-api/questionnaires/{questionnaire_detail_settings.QTN_UUID}'"""),
-        create_target(user, "GET /wizard-api/questionnaires/<id>/versions", "GET",f"""url = '/wizard-api/questionnaires/{questionnaire_detail_versions.QTN_UUID}'"""),
-        create_target(user, "GET /wizard-api/questionnaires/project-tags/suggestions", "GET","url = '/wizard-api/questionnaires/project-tags/suggestions'"),
-        create_target(user, "GET /wizard-api/questionnaire-importers/suggestions", "GET","url = '/wizard-api/questionnaire-importers/suggestions'"),
+        create_target(user, "GET /wizard-api/projects", "GET", "url = '/wizard-api/projects'"),
+        create_target(user, "GET /wizard-api/projects/<id>", "GET",f"""url = '/wizard-api/projects/{project_detail.PROJECT_UUID}'"""),
+        create_target(user, "GET /wizard-api/projects/<id>/comments", "GET",f"""url = '/wizard-api/projects/{project_detail_comments.PROJECT_UUID}?path={project_detail_comments.PATH}'"""),
+        create_target(user, "GET /wizard-api/projects/<id>/documents", "GET",f"""url = '/wizard-api/projects/{project_detail_documents.PROJECT_UUID}'"""),
+        create_target(user, "GET /wizard-api/projects/<id>/events", "GET",f"""url = '/wizard-api/projects/{project_detail_events.PROJECT_UUID}'"""),
+        create_target(user, "GET /wizard-api/projects/<id>/questionnaire", "GET",f"""url = '/wizard-api/projects/{project_detail_questionnaire.PROJECT_UUID}'"""),
+        create_target(user, "GET /wizard-api/projects/<id>/report", "GET",f"""url = '/wizard-api/projects/{project_detail_report.PROJECT_UUID}'"""),
+        create_target(user, "GET /wizard-api/projects/<id>/settings", "GET",f"""url = '/wizard-api/projects/{project_detail_settings.PROJECT_UUID}'"""),
+        create_target(user, "GET /wizard-api/projects/<id>/versions", "GET",f"""url = '/wizard-api/projects/{project_detail_versions.PROJECT_UUID}'"""),
+        create_target(user, "GET /wizard-api/projects/project-tags/suggestions", "GET","url = '/wizard-api/projects/project-tags/suggestions'"),
+        create_target(user, "GET /wizard-api/project-importers/suggestions", "GET","url = '/wizard-api/project-importers/suggestions'"),
         create_target(user, "GET /wizard-api/usage", "GET", "url = '/wizard-api/usage'"),
         create_target(user, "GET /wizard-api/users", "GET", "url LIKE '/wizard-api/users%' AND url != '/wizard-api/users/suggestions'"),
         create_target(user, "GET /wizard-api/users/suggestions", "GET","url = '/wizard-api/users/suggestions'"),

@@ -2,14 +2,14 @@ from locust import task
 
 from tests.authorized_base_test import AuthorizedBaseTest
 
-QTN_UUID = '4d76915c-0f75-4644-a095-cef027059794'
+PROJECT_UUID = '7985e07b-c952-4f96-aca4-f4681a41ad9c'
 
 
 class BasicUser(AuthorizedBaseTest):
 
     @task(5)
-    def get_questionnaire(self):
+    def get_project_documents(self):
         self.client.get(
-            url=f'/questionnaires/{QTN_UUID}/questionnaire',
+            url=f'/projects/{PROJECT_UUID}/documents',
             headers=self.headers,
         )

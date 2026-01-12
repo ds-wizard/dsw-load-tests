@@ -38,16 +38,16 @@ class BasicUser(AuthorizedBaseTest):
         tags = [tag for tag in TAGS]
         random.shuffle(tags)
         tags = tags[0:tags_count]
-        questionnaire = {
+        project = {
             'name': fake.job(),
             'packageId': 'dsw:root:2.4.0',
-            'visibility': 'PrivateQuestionnaire',
-            'sharing': 'RestrictedQuestionnaire',
+            'visibility': 'PrivateProjectVisibility',
+            'sharing': 'RestrictedProjectSharing',
             'questionTagUuids': tags,
             'templateId': None,
         }
         self.client.post(
-            url='/questionnaires',
-            json=questionnaire,
+            url='/projects',
+            json=project,
             headers=self.headers,
         )

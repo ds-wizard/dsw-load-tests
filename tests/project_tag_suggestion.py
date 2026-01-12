@@ -8,6 +8,6 @@ class BasicUser(AuthorizedBaseTest):
     @task(5)
     def run_request(self):
         self.client.get(
-            url='/questionnaire-importers/suggestions',
+            url='/projects/project-tags/suggestions',
             headers=self.headers,
         )

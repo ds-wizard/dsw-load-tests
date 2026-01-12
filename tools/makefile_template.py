@@ -72,7 +72,7 @@ def create_locust_gui():
 
 .PHONY: locust.gui
 locust.gui:
-	@locust -f tests/questionnaire_list/locustfile.py \\
+	@locust -f tests/project_list/locustfile.py \\
           --host=https://researchers.load.ds-wizard.org/wizard-api \\
           --users=5 \\
           --spawn-rate=1 \\
